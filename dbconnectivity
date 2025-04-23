@@ -1,0 +1,42 @@
+public class Table {
+
+    public static void main(String[] args) {
+        String[][] tableData = {
+                {"Username", "Password"},
+                {"Mary Margaret", "marymargaret@123"},
+                {"Joe", "joe@2012"},
+                {"sam", "sam@987"}
+        };
+
+        // Calculate maximum width for each column
+        int[] columnWidths = new int[tableData[0].length];
+        for (String[] row : tableData) {
+            for (int i = 0; i < row.length; i++) {
+                columnWidths[i] = Math.max(columnWidths[i], row[i].length());
+            }
+        }
+
+        // Print table with separator between columns
+        for (int i = 0; i < tableData.length; i++) {
+            // Print each row with proper formatting, separating the username and password
+            if (i == 0) {
+                // Header row with separator line between columns
+                System.out.printf("%-" + (columnWidths[0] + 2) + "s | %-" + (columnWidths[1] + 2) + "s\n",
+                        tableData[i][0], tableData[i][1]);
+                // Print separator line between columns
+                for (int j = 0; j < columnWidths[0] + 2; j++) {
+                    System.out.print("-");
+                }
+                System.out.print(" | ");
+                for (int j = 0; j < columnWidths[1] + 2; j++) {
+                    System.out.print("-");
+                }
+                System.out.println();
+            } else {
+                // Data rows with username and password
+                System.out.printf("%-" + (columnWidths[0] + 2) + "s | %-" + (columnWidths[1] + 2) + "s\n",
+                        tableData[i][0], tableData[i][1]);
+            }
+        }
+    }
+}
